@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Filters from "./components/Filters";
 import JobList from "./components/JobList";
 import JobCreate from "./pages/JobCreate.jsx";
+import "./App.css"; 
 
 function App() {
   // State to control whether the modal is visible
@@ -18,8 +19,8 @@ function App() {
       {/* Pass a prop to Navbar so it can open the modal */}
       <Navbar onCreateJob={handleOpenModal} />
 
-      <div className="container mx-auto px-4 py-6">
         <Filters />
+      <div className="container mx-auto px-4 py-6">
 
         {/* Spacing between filters and the card grid */}
         <div className="mt-6">
