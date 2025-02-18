@@ -11,15 +11,16 @@ app.use('/api/jobs', jobRoutes);
 app.use(cors());
 app.use(express.json());
 
-const MONGODB_URI = 'mongodb+srv://sakshamtiwari:Kkt123@cluster0.y89wby0.mongodb.net/job-manage';
+// Use the environment variable if available, otherwise use the fallback connection string
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://sakshamtiwari:Kkt123@cluster0.y89wby0.mongodb.net/job-manage";
 
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
-  .then(() => console.log('Connected to MongoDB Atlas!'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .then(() => console.log("Connected to MongoDB Atlas!"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Removed the app.listen() call for Vercel deployment
 
