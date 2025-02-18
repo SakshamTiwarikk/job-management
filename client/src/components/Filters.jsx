@@ -8,7 +8,7 @@ function Filters() {
   const [salaryRange, setSalaryRange] = useState([50000, 80000]);
 
   return (
-    <div className="bg-white shadow-[#C6BFBF40]  p-3 px-9 py-4 flex items-center justify-stretch  space-x-4">
+    <div className="bg-white shadow-[#C6BFBF40]  p-3 px-9 py-4 flex items-center justify-between  space-x-4">
       {/* Search Field */}
       <div className="flex items-center  space-x-2">
         <FiSearch className="text-gray-500" />
