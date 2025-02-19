@@ -53,7 +53,7 @@ function JobList() {
       time: "24h Ago",
     },
     {
-      id: 3,
+      id: 4,
       logo: s,
       title: "UX/UI Designer",
       exp: "1-3 yr Exp",
@@ -67,7 +67,7 @@ function JobList() {
       time: "24h Ago",
     },
     {
-      id: 1,
+      id: 5,
       logo: a,
       title: "Full Stack Developer",
       exp: "1-3 yr Exp",
@@ -81,7 +81,7 @@ function JobList() {
       time: "24h Ago",
     },
     {
-      id: 2,
+      id: 6,
       logo: t,
       title: "Node Js Developer",
       exp: "1-3 yr Exp",
@@ -95,7 +95,7 @@ function JobList() {
       time: "24h Ago",
     },
     {
-      id: 3,
+      id: 7,
       logo: s,
       title: "UX/UI Designer",
       exp: "1-3 yr Exp",
@@ -109,7 +109,7 @@ function JobList() {
       time: "24h Ago",
     },
     {
-      id: 3,
+      id: 8,
       logo: s,
       title: "UX/UI Designer",
       exp: "1-3 yr Exp",
@@ -141,11 +141,16 @@ function JobList() {
 
     // 1) Filter by jobTitle (case-insensitive substring of job.title)
     if (jobTitle) {
-      const lowerSearch = jobTitle.toLowerCase();
-      newJobs = newJobs.filter((job) =>
-        job.title.toLowerCase().includes(lowerSearch)
-      );
+      // Split the user input on spaces
+      const words = jobTitle.toLowerCase().split(/\s+/);
+    
+      newJobs = newJobs.filter((job) => {
+        const titleLower = job.title.toLowerCase();
+        // Check if every word is included in the title
+        return words.every((word) => titleLower.includes(word));
+      });
     }
+    
 
     // 2) Filter by location (exact match)
     if (location) {
