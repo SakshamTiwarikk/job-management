@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
-import Filters from "./components/Filters";
 import JobList from "./components/JobList";
 import JobCreate from "./pages/JobCreate.jsx";
 import "./App.css"; 
@@ -19,14 +18,14 @@ function App() {
       {/* Pass a prop to Navbar so it can open the modal */}
       <Navbar onCreateJob={handleOpenModal} />
 
-        <Filters />
+        {/* <Filters /> */}
+          <JobList />
       <div className="container mx-auto px-4 py-6">
 
         {/* Spacing between filters and the card grid */}
-        <div className="mt-6">
-          <JobList />
+        
         </div>
-      </div>
+      
 
       {/* Conditionally render the modal */}
       {showModal && (

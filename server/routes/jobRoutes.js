@@ -7,7 +7,7 @@ const Job = require('../models/Job');
 // @desc   Create a new job
 router.post('/', async (req, res) => {
   try {
-    const newJob = new Job(req.body);
+    const newJob = new Job(req.body); // req.body should include jobTitle, location, jobType, salary, etc.
     const savedJob = await newJob.save();
     return res.status(201).json(savedJob);
   } catch (error) {
@@ -16,36 +16,28 @@ router.post('/', async (req, res) => {
 });
 
 // @route  GET /api/jobs
-// @desc   Get all jobs (with optional filters)
+// server/routes/jobRoutes.js
 router.get('/', async (req, res) => {
   try {
     const { jobTitle, location, jobType, minSalary, maxSalary } = req.query;
-
-    // Build a filter object
     let filter = {};
 
     if (jobTitle) {
       filter.jobTitle = { $regex: jobTitle, $options: 'i' };
     }
-
     if (location) {
       filter.location = { $regex: location, $options: 'i' };
     }
-
     if (jobType) {
       filter.jobType = jobType;
     }
-
-    // If you want to store salary as a numeric range, you'd handle differently
-    // For demonstration, we assume it's a string "50k - 80k"
-    // so numeric filters might not directly apply unless we parse them.
-    // This example just shows how you might approach numeric filtering
-    // if salaryRange was stored as min and max numeric fields.
-    if (minSalary && maxSalary) {
-      // Example if you had numeric fields: 
-      // filter.minSalary = { $gte: parseInt(minSalary) };
-      // filter.maxSalary = { $lte: parseInt(maxSalary) };
+    if (minSalary || maxSalary) {
+      filter.salary = {};
+      if (minSalary) filter.salary.$gte = parseInt(minSalary, 10);
+      if (maxSalary) filter.salary.$lte = parseInt(maxSalary, 10);
     }
+
+    console.log("Server filter:", filter); // Debug log
 
     const jobs = await Job.find(filter);
     return res.status(200).json(jobs);
@@ -53,5 +45,6 @@ router.get('/', async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 });
+
 
 module.exports = router;
